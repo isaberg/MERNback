@@ -1,5 +1,7 @@
 const mongoose = require('./connection.js')
 const Quote = require('./model.js')
+mongoose.Promise = Promise
+
 
 Quote.find({}).remove(() => {
   let chesterton = Quote.create({
