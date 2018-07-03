@@ -30,8 +30,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   Quote.create({
-    author: req.body.authorString,
-    quote: req.body.quoteString
+    author: req.body.author,
+    quote: req.body.quote
   })
     .then((quote) => {
       res.json(quote)
