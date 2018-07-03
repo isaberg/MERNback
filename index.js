@@ -39,13 +39,27 @@ app.get('/:id', (req, res) => {
     })
 })
 
-// app.put('/', (req, res) => {
-//   res.send('PUT @ / not functional yet')
-// })
-//
-// app.delete('/', (req, res) => {
-//   res.send('DELETE @ / not functional yet')
-// })
+app.put('/:id', (req, res) => {
+  var updateQuote = req.body
+  delete updateQuote._id
+  Quote.updateOne({_id: new ObjectID(req.params.id)}, updateQuote, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, 'Failed quote update')
+    } else {
+      res.status(204).end()
+    }
+  })
+})
+
+app.delete('/:id', (req, res) => {
+  Quote.deleteOne({_id: new ObjectID(req.params.id)}, function (err, result) {
+    if (err) {
+      handleError(res, err.message, 'Failed to delete quote')
+    } else {
+      res.status(204).end()
+    }
+  })
+})
 
 app.set('port', process.env.PORT || 3001)
 
