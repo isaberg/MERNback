@@ -19,10 +19,25 @@ app.get('/', (req, res) => {
     })
 })
 
+// Example from mariya: need to see in log what the HTTP req/res looks like
+// createItem: (req, res )=>{
+//         Item.create({name: res.req.body.data
+//         }).then(() => {
+//             res.redirect('/items')
+//
+//         })
+//     }
+
 app.post('/', (req, res) => {
-  Quote.create(req.body)
+  Quote.create({
+    author: req.body.authorString,
+    quote: req.body.quoteString
+  })
     .then((quote) => {
       res.json(quote)
+    })
+    .then(() => {
+      res.redirect('/')
     })
     .catch((err) => {
       console.log(err)
