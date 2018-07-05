@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-  Quote.find()
+  Quote.find({})
     .then((quotes) => {
       res.json(quotes)
     })
