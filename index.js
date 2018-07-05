@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const Quote = require('./db/model.js')
+const queryString = require('query-string')
+// To Do: figure out if queryString is responsible for issues with HTTP req/res CRUD
 
 const app = express()
 
@@ -30,8 +32,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   Quote.create({
-    author: req.body.author,
-    quote: req.body.quote
+    author: req.body,
+    quote: req.body
   })
     .then((quote) => {
       res.json(quote)
